@@ -11,12 +11,20 @@ class SodaCategory extends ProductCategory {
     }
 }
 
-class ChipsCategory extends ProductCategory {
+class PotatoChipsCategory extends ProductCategory {
     name="Potato chips"
     getImageUrl(){
         return this.imgPath +"Chips.png";
     }
 }
+
+class NutsCategory extends ProductCategory {
+    name="Nuts"
+    getImageUrl(){
+        return this.imgPath +"Nuts.png";
+    }
+}
+
 
 class CandyBarCategory extends ProductCategory {
     name="Candy bar"

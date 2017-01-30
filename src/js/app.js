@@ -75,17 +75,29 @@ var SodaCategory = (function (_super) {
     };
     return SodaCategory;
 }(ProductCategory));
-var ChipsCategory = (function (_super) {
-    __extends(ChipsCategory, _super);
-    function ChipsCategory() {
+var PotatoChipsCategory = (function (_super) {
+    __extends(PotatoChipsCategory, _super);
+    function PotatoChipsCategory() {
         var _this = _super !== null && _super.apply(this, arguments) || this;
         _this.name = "Potato chips";
         return _this;
     }
-    ChipsCategory.prototype.getImageUrl = function () {
+    PotatoChipsCategory.prototype.getImageUrl = function () {
         return this.imgPath + "Chips.png";
     };
-    return ChipsCategory;
+    return PotatoChipsCategory;
+}(ProductCategory));
+var NutsCategory = (function (_super) {
+    __extends(NutsCategory, _super);
+    function NutsCategory() {
+        var _this = _super !== null && _super.apply(this, arguments) || this;
+        _this.name = "Nuts";
+        return _this;
+    }
+    NutsCategory.prototype.getImageUrl = function () {
+        return this.imgPath + "Nuts.png";
+    };
+    return NutsCategory;
 }(ProductCategory));
 var CandyBarCategory = (function (_super) {
     __extends(CandyBarCategory, _super);
@@ -112,20 +124,120 @@ var CandyCategory = (function (_super) {
     return CandyCategory;
 }(ProductCategory));
 /// <reference path="productCategory.ts" />
+var Initial = (function () {
+    function Initial() {
+        this.name = "Please select a product";
+        this.price = 0;
+    }
+    return Initial;
+}());
 var CocaCola = (function () {
     function CocaCola() {
         this.name = "Coca-Cola";
-        this.price = .75;
+        this.price = 2.30;
         this.category = new SodaCategory();
     }
     return CocaCola;
+}());
+var Fanta = (function () {
+    function Fanta() {
+        this.name = "Fanta";
+        this.price = 2;
+        this.category = new SodaCategory();
+    }
+    return Fanta;
+}());
+var Sprite = (function () {
+    function Sprite() {
+        this.name = "Sprite";
+        this.price = 1.80;
+        this.category = new SodaCategory();
+    }
+    return Sprite;
+}());
+var Peanuts = (function () {
+    function Peanuts() {
+        this.name = "Peanuts";
+        this.price = 1.50;
+        this.category = new NutsCategory();
+    }
+    return Peanuts;
+}());
+var Cashews = (function () {
+    function Cashews() {
+        this.name = "Cashews";
+        this.price = 2.80;
+        this.category = new NutsCategory();
+    }
+    return Cashews;
+}());
+var Plain = (function () {
+    function Plain() {
+        this.name = "Plain";
+        this.price = 2;
+        this.category = new PotatoChipsCategory();
+    }
+    return Plain;
+}());
+var Cheddar = (function () {
+    function Cheddar() {
+        this.name = "Cheddar";
+        this.price = 2;
+        this.category = new PotatoChipsCategory();
+    }
+    return Cheddar;
+}());
+var Mints = (function () {
+    function Mints() {
+        this.name = "Mints";
+        this.price = 1.30;
+        this.category = new CandyCategory();
+    }
+    return Mints;
+}());
+var Gummies = (function () {
+    function Gummies() {
+        this.name = "Gummies";
+        this.price = 1.90;
+        this.category = new CandyCategory();
+    }
+    return Gummies;
+}());
+var Hersey = (function () {
+    function Hersey() {
+        this.name = "Hersey's";
+        this.price = 1.30;
+        this.category = new CandyBarCategory();
+    }
+    return Hersey;
+}());
+var MilkyWay = (function () {
+    function MilkyWay() {
+        this.name = "Milky Way";
+        this.price = 1.80;
+        this.category = new CandyBarCategory();
+    }
+    return MilkyWay;
 }());
 /// <reference path="product.ts" />
 var productFactory = (function () {
     function productFactory() {
     }
     productFactory.GetProduct = function () {
-        return new CocaCola();
+        var random = Math.floor(Math.random() * 11);
+        switch (random) {
+            case 0: return new CocaCola();
+            case 1: return new Fanta();
+            case 2: return new Sprite();
+            case 3: return new Peanuts();
+            case 4: return new Cashews();
+            case 5: return new Plain();
+            case 6: return new Cheddar();
+            case 7: return new Mints();
+            case 8: return new Gummies();
+            case 9: return new Hersey();
+            case 10: return new MilkyWay();
+        }
     };
     return productFactory;
 }());
@@ -150,7 +262,7 @@ var VendingMachine = (function () {
     function VendingMachine() {
         var _this = this;
         this.paid = ko.observable(0);
-        this.selectedCell = ko.observable(new Cell(new CocaCola()));
+        this.selectedCell = ko.observable(new Cell(new Initial()));
         this.cells = ko.observableArray([]);
         this.acceptedCoins = [new Coins.Dime(), new Coins.Quarter(), new Coins.Half(), new Coins.Dollar()];
         this.canPay = ko.pureComputed(function () {
