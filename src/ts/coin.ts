@@ -1,4 +1,3 @@
-namespace Coins{
 export abstract class Coin{
     value:number
     constructor (value:number){
@@ -41,7 +40,6 @@ export class Dime extends Coin{
     getImageUrl(): string{
         return "image/Dime.png";
     }
-}
 }
 
 
